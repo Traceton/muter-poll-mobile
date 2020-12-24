@@ -8,7 +8,7 @@ export default function CreateDropBox({ navigation }) {
     Math.ceil(Math.random() * 10000) +
       Math.ceil(Math.random() * 10000) +
       Math.ceil(Math.random() * 10000) +
-      Math.ceil(Math.random() * 10000)
+      Math.ceil(Math.random() * 10000).toString()
   );
 
   const [dropBoxName, setDropBoxName] = useState(null);
@@ -19,26 +19,24 @@ export default function CreateDropBox({ navigation }) {
     <ScrollView>
       <Card>
         <Card.Title>Create New Drop Box</Card.Title>
-
         <Card.Title>Your Drop Box Id</Card.Title>
         <Card.Title>{dropBoxId}</Card.Title>
-
         <Card.Title>Name Your Drop Box</Card.Title>
+        <Text>{dropBoxName}</Text>
         <Input
           placeholder="Drop Box Name Here"
           onChangeText={(Text) => {
             setDropBoxName(Text);
           }}
         />
-
         <Card.Title>Drop Box Password(used to check messages later)</Card.Title>
+        <Text>{dropBoxPassword}</Text>
         <Input
           placeholder="Drop Box Password"
           onChangeText={(Text) => {
             setDropBoxPassword(Text);
           }}
         />
-
         <Card.Title>Add A Location(Optional)</Card.Title>
         <Input
           placeholder="Location Of Drop Box"
