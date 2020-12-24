@@ -10,3 +10,12 @@ export let checkIfDropBoxIdAndPasswordIsValid = (
 ) => {
   return true;
 };
+
+export let createNewDropBox = (
+  dropBoxId,
+  dropBoxName,
+  dropBoxPassword,
+  dropBoxLocation
+) => {
+  return true;
+};

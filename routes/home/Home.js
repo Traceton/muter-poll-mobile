@@ -5,12 +5,12 @@ import { Button, Card } from "react-native-elements";
 export default function Home({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.homeContainer}>
-      <Text style={styles.homeTitle}>Workplace Survey</Text>
+      <Text style={styles.homeTitle}>Drop Box</Text>
       <Text style={styles.homeSubtitle}>
         This app is made so that peoples needs or wants can be heard,
         anonymously.
       </Text>
-      <Button
+      {/* <Button
         type="solid"
         title="Take a Survey"
         buttonStyle={{
@@ -33,7 +33,7 @@ export default function Home({ navigation }) {
         onPress={() => {
           navigation.navigate("Create Survey");
         }}
-      />
+      /> */}
     </ScrollView>
   );
 }
