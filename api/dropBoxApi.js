@@ -31,15 +31,11 @@ export let createNewDropBox = async (
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newBox),
-    })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        return true;
-      });
+    }).then((response) => {
+      //   console.log(response);
+      return response.json();
+      return true;
+    });
   } catch (error) {
     return false;
   }
