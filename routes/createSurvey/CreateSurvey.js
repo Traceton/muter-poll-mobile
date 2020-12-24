@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView, View, Text } from "react-native";
+import { Button, Card } from "react-native-elements";
 
 export default function CreateSurvey() {
   return (
-    <View>
+    <ScrollView>
       <Text>Create Survey</Text>
-    </View>
+    </ScrollView>
   );
 }

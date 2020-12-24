@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeStackManager from "./routes/home/HomeStackManager";
 import TakeSurveyStackManager from "./routes/takeSurvey/TakeSurveyStackManager";
 import CreateSurveyStackManager from "./routes/createSurvey/CreateSurveyStackManager";
+import DropBoxStackManager from "./routes/dropBox/DropBoxStackManager";
 const AppTab = createBottomTabNavigator();
 
 export default function App() {
@@ -20,11 +21,12 @@ export default function App() {
         }}
       >
         <AppTab.Screen name="Home" component={HomeStackManager} />
-        <AppTab.Screen name="Take Survey" component={TakeSurveyStackManager} />
+        <AppTab.Screen name="Drop Box" component={DropBoxStackManager} />
+        {/* <AppTab.Screen name="Take Survey" component={TakeSurveyStackManager} />
         <AppTab.Screen
           name="Create Survey"
           component={CreateSurveyStackManager}
-        />
+        /> */}
       </AppTab.Navigator>
     </NavigationContainer>
   );
