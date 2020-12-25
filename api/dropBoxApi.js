@@ -23,7 +23,6 @@ export let createNewDropBox = async (
     dropBoxPassword: dropBoxPassword,
     dropBoxLocation: dropBoxLocation,
   };
-
   try {
     return await fetch(`${API}/dropBox/createNewDropBox`, {
       method: "POST",
@@ -33,10 +32,33 @@ export let createNewDropBox = async (
       body: JSON.stringify(newBox),
     }).then((response) => {
       //   console.log(response);
-      return response.json();
+      //   return response.json();
       return true;
     });
   } catch (error) {
+    return false;
+  }
+};
+
+export let createNewDropBoxAnswer = async (dropBoxId, dropBoxAnswer) => {
+  const newBoxAnswer = {
+    dropBoxId: dropBoxId,
+    dropBoxAnswer: dropBoxAnswer,
+  };
+  try {
+    return await fetch(`${API}/dropBox/createNewDropBoxAnswer`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newBoxAnswer),
+    }).then((response) => {
+      //   console.log(response);
+      //   return response.json();
+      return true;
+    });
+  } catch (error) {
+    console.log(error);
     return false;
   }
 };
