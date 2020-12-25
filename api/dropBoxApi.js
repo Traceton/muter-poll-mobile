@@ -62,3 +62,24 @@ export let createNewDropBoxAnswer = async (dropBoxId, dropBoxAnswer) => {
     return false;
   }
 };
+
+export let deleteDropBox = async (dropBoxId, dropBoxPassword) => {
+  try {
+    return await fetch(
+      `${API}/dropBox/deleteDropBox/${dropBoxId}/${dropBoxPassword}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then((response) => {
+      //   console.log(response);
+      //   return response.json();
+      return true;
+    });
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
