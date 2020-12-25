@@ -40,6 +40,10 @@ export let createNewDropBox = async (
   }
 };
 
+export let getDropBoxByIdAndPassword = async () => {
+  console.log("drop box here");
+};
+
 export let createNewDropBoxAnswer = async (dropBoxId, dropBoxAnswer) => {
   const newBoxAnswer = {
     dropBoxId: dropBoxId,
@@ -57,6 +61,7 @@ export let createNewDropBoxAnswer = async (dropBoxId, dropBoxAnswer) => {
       //   return response.json();
       return true;
     });
+    return true;
   } catch (error) {
     console.log(error);
     return false;

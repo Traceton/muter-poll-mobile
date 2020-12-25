@@ -5,6 +5,7 @@ import CreateOrAnswer from "./CreateOrAnswer";
 import CheckIfPassword from "./CheckIfPassword";
 import ViewDropBox from "./ViewDropBox";
 import CreateDropBox from "./CreateDropBox";
+import ThanksForAnswer from "./ThanksForAnswer";
 
 const DropBoxStack = createStackNavigator();
 export default function DropBoxStackManager() {
@@ -17,6 +18,10 @@ export default function DropBoxStackManager() {
         component={CheckIfPassword}
       />
       <DropBoxStack.Screen name="View Drop Box" component={ViewDropBox} />
+      <DropBoxStack.Screen
+        name="Thanks For Answer"
+        component={ThanksForAnswer}
+      />
     </DropBoxStack.Navigator>
   );
 }

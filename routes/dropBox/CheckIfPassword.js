@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
-import { checkIfDropBoxIdAndPasswordIsValid } from "../../api/dropBoxApi";
+import {
+  checkIfDropBoxIdAndPasswordIsValid,
+  createNewDropBoxAnswer,
+} from "../../api/dropBoxApi";
 
 export default function CreateOrAnswer({ navigation, route }) {
-  const dropBoxId = route.params.dropBoxId;
+  const [dropBoxId, setDropBoxId] = useState(route.params.dropBoxId);
   const [dropBoxPassword, setDropBoxPassword] = useState(null);
   const [dropBoxAnswer, setDropBoxAnswer] = useState(null);
   return (
@@ -21,8 +24,12 @@ export default function CreateOrAnswer({ navigation, route }) {
         <Button
           title="Leave Message"
           type="solid"
-          onPress={() => {
-            alert(dropBoxAnswer);
+          onPress={async () => {
+            let valid = await createNewDropBoxAnswer(dropBoxId, dropBoxAnswer);
+            if (valid === true) {
+              alert("thanks for your message!");
+              navigation.navigate("Create Or Answer");
+            }
           }}
         />
         <Divider style={{ backgroundColor: "#333", marginVertical: 20 }} />

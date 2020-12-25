@@ -20,9 +20,9 @@ export default function CreateOrAnswer({ navigation }) {
           title="Find Drop Box"
           type="solid"
           buttonStyle={{}}
-          onPress={() => {
+          onPress={async () => {
             if (dropBoxId != null && dropBoxId != undefined) {
-              let valid = checkIfDropBoxIdIsValid(dropBoxId);
+              let valid = await checkIfDropBoxIdIsValid(dropBoxId);
               if (valid === true) {
                 navigation.navigate("Check If Password", {
                   dropBoxId: dropBoxId,
