@@ -8,7 +8,7 @@ export default function ViewDropBox({ navigation, route }) {
 
   useEffect(() => {
     getDropBoxByIdAndPassword();
-  }, []);
+  }, [getDropBoxByIdAndPassword]);
 
   return (
     <ScrollView>
