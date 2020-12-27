@@ -30,7 +30,7 @@ export default function ViewDropBox({ navigation, route }) {
 
     getDropBox();
     getAnswers();
-  }, [dropBoxId, dropBoxPassword]);
+  }, []);
 
   let displayedDropBox;
 
