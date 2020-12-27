@@ -44,7 +44,14 @@ export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
   let dataFromApi;
   try {
     await fetch(
-      `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
+      `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => (dataFromApi = data));
@@ -61,7 +68,14 @@ export let getDropBoxAnswersByIdAndPassword = async (
   let dataFromApi;
   try {
     await fetch(
-      `${API}/dropBox/getAnswersByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
+      `${API}/dropBox/getAnswersByIdAndPassword/${dropBoxId}/${dropBoxPassword}`,
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }
     )
       .then((response) => response.json())
       .then((data) => (dataFromApi = data));
