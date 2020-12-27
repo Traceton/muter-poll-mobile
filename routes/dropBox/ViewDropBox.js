@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
-import { getDropBoxByIdAndPassword } from "../../api/dropBoxApi";
+import {
+  getDropBoxByIdAndPassword,
+  getDropBoxAnswersByIdAndPassword,
+} from "../../api/dropBoxApi";
 import { API } from "@env";
 export default function ViewDropBox({ navigation, route }) {
   const { dropBoxId, dropBoxPassword } = route.params;
   const [dropBoxFromApi, setDropBoxFromApi] = useState(null);
+  const [dropBoxAnswersFromApi, setDropBoxAnswersFromApi] = useState(null);
   useEffect(() => {
-    let getData = async () => {
+    let getDropBox = async () => {
       const dataFromApi = await getDropBoxByIdAndPassword(
         dropBoxId,
         dropBoxPassword
@@ -15,25 +19,42 @@ export default function ViewDropBox({ navigation, route }) {
       setDropBoxFromApi(dataFromApi);
       console.log(dataFromApi);
     };
-    getData();
+    let getAnswers = async () => {
+      const dataFromApi = await getDropBoxAnswersByIdAndPassword(
+        dropBoxId,
+        dropBoxPassword
+      );
+      setDropBoxAnswersFromApi(dataFromApi);
+      console.log(dataFromApi);
+    };
+
+    getDropBox();
+    getAnswers();
   }, [dropBoxId, dropBoxPassword]);
 
   let displayedDropBox;
 
   if (dropBoxFromApi) {
-    displayedDropBox = dropBoxFromApi;
+    let dropBox = dropBoxFromApi;
+    displayedDropBox = (
+      <ScrollView>
+        <Card>
+          <Card.Title>name --> {dropBox.dropBoxName}</Card.Title>
+          <Card.Title>id --> {dropBox.dropBoxId}</Card.Title>
+          <Card.Title>password --> {dropBox.dropBoxPassword}</Card.Title>
+        </Card>
+      </ScrollView>
+    );
   } else {
-    displayedDropBox = "";
+    displayedDropBox = <Text></Text>;
   }
 
-  return (
-    <ScrollView>
-      <Card>
-        <Card.Title>
-          Wiew Drop Box id--> {dropBoxId}, password --> {dropBoxPassword}{" "}
-        </Card.Title>
-        <Text>{displayedDropBox.dropBoxName}</Text>
-      </Card>
-    </ScrollView>
-  );
+  let displayedAnswers;
+  if (dropBoxAnswersFromApi) {
+    displayedAnswers = "";
+  } else {
+    displayedAnswers = "";
+  }
+
+  return <ScrollView>{displayedDropBox}</ScrollView>;
 }

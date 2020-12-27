@@ -50,7 +50,23 @@ export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
       .then((data) => (dataFromApi = data));
     return dataFromApi;
   } catch (error) {
-    // console.log(error);
+    return false;
+  }
+};
+
+export let getDropBoxAnswersByIdAndPassword = async (
+  dropBoxId,
+  dropBoxPassword
+) => {
+  let dataFromApi;
+  try {
+    await fetch(
+      `${API}/dropBox/getAnswersByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
+    )
+      .then((response) => response.json())
+      .then((data) => (dataFromApi = data));
+    return dataFromApi;
+  } catch (error) {
     return false;
   }
 };
