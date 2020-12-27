@@ -41,15 +41,16 @@ export let createNewDropBox = async (
 };
 
 export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
+  let dataFromApi;
   try {
-    fetch(
+    await fetch(
       `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
-    ).then((data) => {
-      console.log(data);
-      // return  data ;
-    });
+    )
+      .then((response) => response.json())
+      .then((data) => (dataFromApi = data));
+    return dataFromApi;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return false;
   }
 };

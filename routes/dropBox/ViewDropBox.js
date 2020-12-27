@@ -7,15 +7,15 @@ export default function ViewDropBox({ navigation, route }) {
   const { dropBoxId, dropBoxPassword } = route.params;
   const [dropBoxFromApi, setDropBoxFromApi] = useState();
   useEffect(() => {
-    let getBoxFromAPI = async () => {
-      // let box = await getDropBoxByIdAndPassword(dropBoxId, dropBoxPassword);
-      await fetch(
-        `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
-      )
-        .then((response) => response.json())
-        .then((data) => setDropBoxFromApi(data));
+    let getData = async () => {
+      const dataFromApi = await getDropBoxByIdAndPassword(
+        dropBoxId,
+        dropBoxPassword
+      );
+      setDropBoxFromApi(dataFromApi);
+      console.log(dataFromApi);
     };
-    getBoxFromAPI();
+    getData();
   }, [dropBoxId, dropBoxPassword]);
 
   return (
