@@ -49,12 +49,25 @@ export default function ViewDropBox({ navigation, route }) {
     displayedDropBox = <Text></Text>;
   }
 
-  let displayedAnswers;
+  let displayedAnswers = [];
   if (dropBoxAnswersFromApi) {
-    displayedAnswers = "";
+    dropBoxAnswersFromApi.map((answer) => {
+      displayedAnswers.push(
+        <ScrollView key={answer.dropBoxAnswer}>
+          <Card>
+            <Card.Title>{answer.dropBoxAnswer}</Card.Title>
+          </Card>
+        </ScrollView>
+      );
+    });
   } else {
-    displayedAnswers = "";
+    displayedAnswers = <Text></Text>;
   }
 
-  return <ScrollView>{displayedDropBox}</ScrollView>;
+  return (
+    <ScrollView>
+      {displayedDropBox}
+      {displayedAnswers}
+    </ScrollView>
+  );
 }
