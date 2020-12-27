@@ -8,6 +8,9 @@ import CreateSurveyStackManager from "./routes/createSurvey/CreateSurveyStackMan
 import DropBoxStackManager from "./routes/dropBox/DropBoxStackManager";
 const AppTab = createBottomTabNavigator();
 
+//  12/27/2020 - Implement emailJs? send users a link to view their own drop box. and give the drop
+// box creator a way to email anyone a link to leave a message for the dropBox.
+
 export default function App() {
   return (
     <NavigationContainer>
