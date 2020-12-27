@@ -5,7 +5,7 @@ import { getDropBoxByIdAndPassword } from "../../api/dropBoxApi";
 import { API } from "@env";
 export default function ViewDropBox({ navigation, route }) {
   const { dropBoxId, dropBoxPassword } = route.params;
-  const [dropBoxFromApi, setDropBoxFromApi] = useState();
+  const [dropBoxFromApi, setDropBoxFromApi] = useState(null);
   useEffect(() => {
     let getData = async () => {
       const dataFromApi = await getDropBoxByIdAndPassword(
@@ -18,13 +18,21 @@ export default function ViewDropBox({ navigation, route }) {
     getData();
   }, [dropBoxId, dropBoxPassword]);
 
+  let displayedDropBox;
+
+  if (dropBoxFromApi) {
+    displayedDropBox = dropBoxFromApi;
+  } else {
+    displayedDropBox = "";
+  }
+
   return (
     <ScrollView>
       <Card>
         <Card.Title>
           Wiew Drop Box id--> {dropBoxId}, password --> {dropBoxPassword}{" "}
         </Card.Title>
-        <Text>{dropBoxFromApi.dropBoxName}</Text>
+        <Text>{displayedDropBox.dropBoxName}</Text>
       </Card>
     </ScrollView>
   );
