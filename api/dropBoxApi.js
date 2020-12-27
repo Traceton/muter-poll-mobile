@@ -44,10 +44,9 @@ export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
   try {
     fetch(
       `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
-    ).then((response) => {
-      //   console.log(response);
-      return response.json();
-      // return true;
+    ).then((data) => {
+      console.log(data);
+      // return  data ;
     });
   } catch (error) {
     console.log(error);

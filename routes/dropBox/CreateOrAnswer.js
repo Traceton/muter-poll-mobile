@@ -4,7 +4,7 @@ import { Button, Card, Input, Divider } from "react-native-elements";
 import { checkIfDropBoxIdIsValid } from "../../api/dropBoxApi";
 
 export default function CreateOrAnswer({ navigation }) {
-  const [dropBoxId, setDropBoxId] = useState(null);
+  const [dropBoxId, setDropBoxId] = useState("145533205");
 
   return (
     <ScrollView>

@@ -8,7 +8,7 @@ import {
 
 export default function CreateOrAnswer({ navigation, route }) {
   const [dropBoxId, setDropBoxId] = useState(route.params.dropBoxId);
-  const [dropBoxPassword, setDropBoxPassword] = useState(null);
+  const [dropBoxPassword, setDropBoxPassword] = useState("Test1");
   const [dropBoxAnswer, setDropBoxAnswer] = useState(null);
   return (
     <ScrollView>
@@ -47,9 +47,9 @@ export default function CreateOrAnswer({ navigation, route }) {
           title="Check Drop Box"
           type="outline"
           buttonStyle={{}}
-          onPress={() => {
+          onPress={async () => {
             if (dropBoxPassword != null && dropBoxPassword != undefined) {
-              const valid = checkIfDropBoxIdAndPasswordIsValid(
+              const valid = await checkIfDropBoxIdAndPasswordIsValid(
                 dropBoxId,
                 dropBoxPassword
               );
