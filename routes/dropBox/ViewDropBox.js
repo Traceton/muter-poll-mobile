@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView, View, Text } from "react-native";
-import { Button, Card, Input, Divider, ListItem } from "react-native-elements";
+import {
+  Button,
+  Card,
+  Input,
+  Divider,
+  ListItem,
+  Tile,
+} from "react-native-elements";
 import {
   getDropBoxByIdAndPassword,
   getDropBoxAnswersByIdAndPassword,
@@ -44,15 +51,31 @@ export default function ViewDropBox({ navigation, route }) {
     let dropBox = dropBoxFromApi;
     displayedDropBox = (
       <ScrollView
-        contentContainerStyle={{
-          marginVertical: 20,
-          // height: "50%",
-          // justifyContent: "center",
-          // alignContent: "center",
-          // alignItems: "center",
-        }}
+        contentContainerStyle={
+          {
+            // marginVertical: 20,
+            // height: "50%",
+            // justifyContent: "center",
+            // alignContent: "center",
+            // alignItems: "center",
+          }
+        }
       >
-        <Card
+        <Tile
+          imageSrc={{
+            uri:
+              "https://images.unsplash.com/photo-1608311820732-36092cc3470a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=582&q=80",
+          }}
+          title={dropBox.dropBoxName}
+          titleStyle={{ fontSize: 35 }}
+          activeOpacity={10}
+          height={500}
+          featured
+          caption={dropBox.dropBoxId}
+          captionStyle={{ fontSize: 20 }}
+        />
+
+        {/* <Card
           containerStyle={{
             backgroundColor: cardBackgroundColor,
             borderRadius: 10,
@@ -75,8 +98,7 @@ export default function ViewDropBox({ navigation, route }) {
             {dropBox.dropBoxPassword}
           </Card.Title>
         </Card>
-
-        {/* <Text style={{ color: cardTextColor, fontSize: 30 }}>
+        <Text style={{ color: cardTextColor, fontSize: 30 }}>
           Drop Box Name
         </Text>
         <Text style={{ color: cardTextColor, fontSize: 20 }}>
@@ -112,12 +134,17 @@ export default function ViewDropBox({ navigation, route }) {
               {answer.dropBoxAnswer}
             </Card.Title>
           </Card> */}
-          <ListItem bottomDivider>
+          <ListItem
+            containerStyle={{ backgroundColor: pageBackgroundColor }}
+            bottomDivider
+          >
             <ListItem.Content>
-              <ListItem.Title style={{ textAlign: "center" }}>
+              <ListItem.Title style={{ color: "white" }}>
                 {answer.dropBoxAnswer}
               </ListItem.Title>
-              <ListItem.Subtitle>{answer.createdOn}</ListItem.Subtitle>
+              <ListItem.Subtitle style={{ color: "white" }}>
+                {answer.createdOn}
+              </ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         </ScrollView>

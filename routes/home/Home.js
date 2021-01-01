@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, Text, StyleSheet } from "react-native";
-import { Button, Card } from "react-native-elements";
+import { Button, Card, Tile } from "react-native-elements";
 
 export default function Home({ navigation }) {
   return (
