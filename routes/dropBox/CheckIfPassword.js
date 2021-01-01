@@ -5,18 +5,30 @@ import {
   checkIfDropBoxIdAndPasswordIsValid,
   createNewDropBoxAnswer,
 } from "../../api/dropBoxApi";
-
+import {
+  pageBackgroundColor,
+  cardBackgroundColor,
+  cardTextColor,
+} from "../../_appConfig/Theme";
 export default function CreateOrAnswer({ navigation, route }) {
   const [dropBoxId, setDropBoxId] = useState(route.params.dropBoxId);
   const [dropBoxPassword, setDropBoxPassword] = useState("Test1");
   const [dropBoxAnswer, setDropBoxAnswer] = useState(null);
   return (
-    <ScrollView>
-      <Card>
+    <ScrollView
+      contentContainerStyle={{
+        backgroundColor: pageBackgroundColor,
+        justifyContent: "center",
+        minHeight: "100%",
+      }}
+    >
+      <Card containerStyle={{ borderRadius: 10 }}>
         <Card.Title>Leave a Message </Card.Title>
 
         <Input
-          placeholder="Drop Box Message Here"
+          label="Your Message"
+          placeholder="Message Here"
+          style={{}}
           onChangeText={(Text) => {
             setDropBoxAnswer(Text);
           }}
@@ -32,20 +44,21 @@ export default function CreateOrAnswer({ navigation, route }) {
             }
           }}
         />
-        <Divider style={{ backgroundColor: "#333", marginVertical: 20 }} />
+        <Divider style={{ backgroundColor: "#333", marginVertical: 50 }} />
         <Card.Title>Have the password?</Card.Title>
         <Card.Title>
           Find out what others left in your drop box below.
         </Card.Title>
         <Input
-          placeholder="Drop Box Password Here"
+          label="Drop Box Password"
+          placeholder="Password Here"
           onChangeText={(Text) => {
             setDropBoxPassword(Text);
           }}
         />
         <Button
           title="Check Drop Box"
-          type="outline"
+          type="solid"
           buttonStyle={{}}
           onPress={async () => {
             if (dropBoxPassword != null && dropBoxPassword != undefined) {

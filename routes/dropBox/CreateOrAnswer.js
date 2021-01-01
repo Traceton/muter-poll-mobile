@@ -2,16 +2,34 @@ import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
 import { checkIfDropBoxIdIsValid } from "../../api/dropBoxApi";
-
+import {
+  pageBackgroundColor,
+  cardBackgroundColor,
+  cardTextColor,
+} from "../../_appConfig/Theme";
 export default function CreateOrAnswer({ navigation }) {
   const [dropBoxId, setDropBoxId] = useState("145533205");
 
   return (
-    <ScrollView>
-      <Card>
+    <ScrollView
+      contentContainerStyle={{
+        backgroundColor: pageBackgroundColor,
+        minHeight: "100%",
+        justifyContent: "center",
+      }}
+    >
+      <Card
+        containerStyle={{
+          borderRadius: 10,
+          height: "60%",
+          justifyContent: "space-around",
+        }}
+      >
         <Card.Title>Already have a Drop Box Code?</Card.Title>
         <Input
-          placeholder="Drop Box Code here"
+          label="Drop Box Code"
+          placeholder="Code Here"
+          style={{ marginVertical: 10 }}
           onChangeText={(Text) => {
             setDropBoxId(Text);
           }}
@@ -19,7 +37,7 @@ export default function CreateOrAnswer({ navigation }) {
         <Button
           title="Find Drop Box"
           type="solid"
-          buttonStyle={{}}
+          buttonStyle={{ marginVertical: 10 }}
           onPress={async () => {
             if (dropBoxId != null && dropBoxId != undefined) {
               let valid = await checkIfDropBoxIdIsValid(dropBoxId);
@@ -33,11 +51,11 @@ export default function CreateOrAnswer({ navigation }) {
             }
           }}
         />
-        <Divider style={{ backgroundColor: "#333", marginVertical: 20 }} />
+        <Divider style={{ backgroundColor: "#333", marginVertical: 30 }} />
         <Button
           title="Create New Drop Box"
           type="outline"
-          buttonStyle={{}}
+          buttonStyle={{ marginVertical: 30 }}
           onPress={() => {
             navigation.navigate("Create Drop Box");
           }}
