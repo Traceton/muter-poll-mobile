@@ -74,44 +74,6 @@ export default function ViewDropBox({ navigation, route }) {
           caption={dropBox.dropBoxId}
           captionStyle={{ fontSize: 20 }}
         />
-
-        {/* <Card
-          containerStyle={{
-            backgroundColor: cardBackgroundColor,
-            borderRadius: 10,
-          }}
-        >
-          <Card.Title style={{ color: cardTextColor }}>
-            Drop Box Name
-          </Card.Title>
-          <Card.Title style={{ color: cardTextColor }}>
-            {dropBox.dropBoxName}
-          </Card.Title>
-          <Card.Title style={{ color: cardTextColor }}>Drop Box Id</Card.Title>
-          <Card.Title style={{ color: cardTextColor }}>
-            {dropBox.dropBoxId}
-          </Card.Title>
-          <Card.Title style={{ color: cardTextColor }}>
-            Drop Box Password
-          </Card.Title>
-          <Card.Title style={{ color: cardTextColor }}>
-            {dropBox.dropBoxPassword}
-          </Card.Title>
-        </Card>
-        <Text style={{ color: cardTextColor, fontSize: 30 }}>
-          Drop Box Name
-        </Text>
-        <Text style={{ color: cardTextColor, fontSize: 20 }}>
-          {dropBox.dropBoxName}
-        </Text>
-        <Text style={{ color: cardTextColor, fontSize: 30 }}>
-          Drop Box Code
-        </Text>
-        <Text style={{ color: cardTextColor, fontSize: 20 }}>
-          {dropBox.dropBoxId}
-        </Text>
-        <Text style={{ color: cardTextColor }}></Text>
-        <Text style={{ color: cardTextColor }}></Text> */}
       </ScrollView>
     );
   } else {
@@ -123,17 +85,6 @@ export default function ViewDropBox({ navigation, route }) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
-          {/* <Card
-            containerStyle={{
-              backgroundColor: cardBackgroundColor,
-              borderRadius: 10,
-            }}
-          >
-            <Card.Title style={{ color: cardTextColor }}>
-              {" "}
-              {answer.dropBoxAnswer}
-            </Card.Title>
-          </Card> */}
           <ListItem
             containerStyle={{ backgroundColor: pageBackgroundColor }}
             bottomDivider

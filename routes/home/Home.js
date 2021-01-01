@@ -1,6 +1,7 @@
 import React from "react";
 import { ScrollView, Text, StyleSheet } from "react-native";
 import { Button, Card, Tile } from "react-native-elements";
+import { pageBackgroundColor } from "../../_appConfig/Theme";
 
 export default function Home({ navigation }) {
   return (
@@ -41,7 +42,7 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   homeContainer: {
     height: "95%",
-    backgroundColor: "#333",
+    backgroundColor: pageBackgroundColor,
     margin: 20,
     borderRadius: 10,
     justifyContent: "center",
