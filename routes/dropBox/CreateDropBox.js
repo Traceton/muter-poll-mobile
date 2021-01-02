@@ -5,8 +5,7 @@ import { createNewDropBox } from "../../api/dropBoxApi";
 
 export default function CreateDropBox({ navigation }) {
   const [dropBoxId, setDropBoxId] = useState(
-    Math.ceil(Math.random() * 10000) +
-      Math.ceil(Math.random() * 10000).toString()
+    Math.ceil(Math.random() * 1000) + Math.ceil(Math.random() * 100).toString()
   );
 
   const [dropBoxName, setDropBoxName] = useState(null);
