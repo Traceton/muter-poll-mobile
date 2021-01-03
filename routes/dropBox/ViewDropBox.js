@@ -108,7 +108,7 @@ export default function ViewDropBox({ navigation, route }) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
-          <ListItem
+          {/* <ListItem
             containerStyle={{ backgroundColor: pageBackgroundColor }}
             bottomDivider
           >
@@ -120,7 +120,18 @@ export default function ViewDropBox({ navigation, route }) {
                 {answer.createdOn}
               </ListItem.Subtitle>
             </ListItem.Content>
-          </ListItem>
+          </ListItem> */}
+          <Card
+            containerStyle={{
+              backgroundColor: cardBackgroundColor,
+              borderRadius: 10,
+            }}
+          >
+            <Card.Title style={{ fontSize: 20 }}>
+              {answer.dropBoxAnswer}
+            </Card.Title>
+            <Card.Title style={{ fontSize: 15 }}>{answer.createdOn}</Card.Title>
+          </Card>
         </ScrollView>
       );
     });
