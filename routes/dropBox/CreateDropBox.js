@@ -51,8 +51,11 @@ export default function CreateDropBox({ navigation }) {
               dropBoxPassword,
               dropBoxLocation
             );
-            if (success === true) {
-              alert("Drop Box created. Dont forget your id and password");
+            if (success) {
+              navigation.navigate("View Drop Box", {
+                dropBoxId: dropBoxId,
+                dropBoxPassword: dropBoxPassword,
+              });
             }
           }}
         />

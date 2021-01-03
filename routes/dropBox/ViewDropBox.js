@@ -11,6 +11,7 @@ import {
 import {
   getDropBoxByIdAndPassword,
   getDropBoxAnswersByIdAndPassword,
+  deleteDropBox,
 } from "../../api/dropBoxApi";
 import { API } from "@env";
 import {
@@ -61,7 +62,7 @@ export default function ViewDropBox({ navigation, route }) {
           }
         }
       >
-        <Tile
+        {/* <Tile
           imageSrc={{
             uri:
               "https://images.unsplash.com/photo-1608311820732-36092cc3470a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=582&q=80",
@@ -73,7 +74,29 @@ export default function ViewDropBox({ navigation, route }) {
           featured
           caption={dropBox.dropBoxId}
           captionStyle={{ fontSize: 20 }}
-        />
+        /> */}
+        <Card
+          containerStyle={{
+            borderRadius: 10,
+            justifyContent: "space-around",
+          }}
+        >
+          <Card.Title style={{ fontSize: 25 }}>
+            {dropBox.dropBoxName}
+          </Card.Title>
+          <Card.Title style={{ fontSize: 20 }}>{dropBox.dropBoxId}</Card.Title>
+          <Button
+            buttonStyle={{ backgroundColor: "red" }}
+            type="solid"
+            title="Delete Drop Box"
+            onLongPress={async () => {
+              let deleted = await deleteDropBox(dropBoxId, dropBoxPassword);
+              if (deleted) {
+                navigation.navigate("Create Or Answer");
+              }
+            }}
+          />
+        </Card>
       </ScrollView>
     );
   } else {
