@@ -88,7 +88,7 @@ export default function ViewDropBox({ navigation, route }) {
           <Button
             buttonStyle={{ backgroundColor: "red" }}
             type="solid"
-            title="Delete Drop Box"
+            title="Hold To Delete Drop Box"
             onLongPress={async () => {
               let deleted = await deleteDropBox(dropBoxId, dropBoxPassword);
               if (deleted) {
@@ -148,6 +148,13 @@ export default function ViewDropBox({ navigation, route }) {
     >
       <View>
         {displayedDropBox}
+        <Divider
+          style={{
+            marginVertical: 30,
+            marginHorizontal: 15,
+            backgroundColor: "black",
+          }}
+        />
         {displayedAnswers}
       </View>
     </ScrollView>
