@@ -8,7 +8,7 @@ import {
   cardTextColor,
 } from "../../_appConfig/Theme";
 export default function CreateOrAnswer({ navigation }) {
-  const [dropBoxId, setDropBoxId] = useState("145533205");
+  const [dropBoxId, setDropBoxId] = useState("7128");
 
   return (
     <ScrollView
