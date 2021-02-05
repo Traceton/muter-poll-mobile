@@ -24,7 +24,6 @@ export default function CreateOrAnswer({ navigation, route }) {
     >
       <Card containerStyle={{ borderRadius: 10 }}>
         <Card.Title>Leave a Message </Card.Title>
-
         <Input
           label="Your Message"
           placeholder="Message Here"
