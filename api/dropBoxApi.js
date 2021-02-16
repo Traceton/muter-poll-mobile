@@ -11,14 +11,6 @@ export let checkIfDropBoxIdAndPasswordIsValid = async (
   return true;
 };
 
-export let sendNewDropBoxEmailNotification = async (
-  dropBoxId,
-  dropBoxName,
-  dropBoxPassword,
-  dropBoxUserEmail,
-  dropBoxLocation
-) => {};
-
 export let createNewDropBox = async (
   dropBoxId,
   dropBoxName,

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
-import {
-  createNewDropBox,
-  sendNewDropBoxEmailNotification,
-} from "../../api/dropBoxApi";
-import emailjs from "emailjs-com";
+import { createNewDropBox } from "../../api/dropBoxApi";
 import { API } from "@env";
 export default function CreateDropBox({ navigation }) {
   const [dropBoxId, setDropBoxId] = useState(
@@ -43,7 +39,7 @@ export default function CreateDropBox({ navigation }) {
           Your Email (Where we'll send your drop box info){" "}
         </Card.Title>
         <Input
-          placeholder="Drop Box Password"
+          placeholder="Your Email"
           onChangeText={(Text) => {
             setDropBoxUserEmail(Text);
           }}
@@ -59,20 +55,13 @@ export default function CreateDropBox({ navigation }) {
           type="solid"
           title="Create Drop Box"
           onPress={async () => {
-            const success = createNewDropBox(
+            const success = await createNewDropBox(
               dropBoxId,
               dropBoxName,
               dropBoxPassword,
               dropBoxLocation
             );
             if (success) {
-              sendNewDropBoxEmailNotification(
-                dropBoxId,
-                dropBoxName,
-                dropBoxPassword,
-                dropBoxUserEmail,
-                dropBoxLocation
-              );
               navigation.navigate("View Drop Box", {
                 dropBoxId: dropBoxId,
                 dropBoxPassword: dropBoxPassword,

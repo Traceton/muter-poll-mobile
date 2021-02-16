@@ -14,6 +14,8 @@ import {
   deleteDropBox,
 } from "../../api/dropBoxApi";
 import { API } from "@env";
+import { sendNewDropBoxEmailNotification } from "../../api/email";
+import { sendNewDropBoxSmsNotification } from "../../api/sms";
 import {
   pageBackgroundColor,
   cardBackgroundColor,
@@ -38,7 +40,7 @@ export default function ViewDropBox({ navigation, route }) {
         dropBoxId,
         dropBoxPassword
       );
-      setDropBoxAnswersFromApi(dataFromApi);
+      await setDropBoxAnswersFromApi(dataFromApi);
       console.log(dataFromApi);
     };
 
@@ -48,7 +50,7 @@ export default function ViewDropBox({ navigation, route }) {
 
   let displayedDropBox;
 
-  if (dropBoxFromApi) {
+  if (dropBoxFromApi !== null && dropBoxAnswersFromApi !== undefined) {
     let dropBox = dropBoxFromApi;
     displayedDropBox = (
       <ScrollView
@@ -86,7 +88,34 @@ export default function ViewDropBox({ navigation, route }) {
           </Card.Title>
           <Card.Title style={{ fontSize: 20 }}>{dropBox.dropBoxId}</Card.Title>
           <Button
-            buttonStyle={{ backgroundColor: "red" }}
+            buttonStyle={{
+              backgroundColor: "#333",
+              marginVertical: 5,
+            }}
+            type="outline"
+            title="Notify Others by Sms"
+            onPress={async () => {
+              sendNewDropBoxSmsNotification(
+                dropBox.dropBoxId,
+                dropBox.dropBoxName,
+                dropBox.dropBoxLocation
+              );
+            }}
+          />
+          <Button
+            buttonStyle={{ backgroundColor: "#333", marginVertical: 5 }}
+            type="outline"
+            title="Notify Others by Email"
+            onPress={async () => {
+              sendNewDropBoxEmailNotification(
+                dropBox.dropBoxId,
+                dropBox.dropBoxName,
+                dropBox.dropBoxLocation
+              );
+            }}
+          />
+          <Button
+            buttonStyle={{ backgroundColor: "red", marginVertical: 5 }}
             type="solid"
             title="Hold To Delete Drop Box"
             onLongPress={async () => {
@@ -104,7 +133,7 @@ export default function ViewDropBox({ navigation, route }) {
   }
 
   let displayedAnswers = [];
-  if (dropBoxAnswersFromApi) {
+  if (dropBoxAnswersFromApi !== null && dropBoxAnswersFromApi !== undefined) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
