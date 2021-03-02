@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "workplaceSurvey",
-    "slug": "workplaceSurvey",
-    "version": "1.0.0",
+    "name": "muter-poll-mobile",
+    "slug": "muter-poll-mobile",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -23,7 +23,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.tjcharm.muterpollmobile",
+      "permissions": "[]"
     },
     "web": {
       "favicon": "./assets/favicon.png"
