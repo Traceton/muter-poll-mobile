@@ -12,14 +12,21 @@ export default function CreateDropBox({ navigation }) {
   const [dropBoxQuestion, setdropBoxQuestion] = useState(null);
   const [dropBoxPassword, setDropBoxPassword] = useState(null);
   const [dropBoxLocation, setDropBoxLocation] = useState(null);
-  const [dropBoxUserEmail, setDropBoxUserEmail] = useState(null);
 
   return (
     <ScrollView>
       <Card>
-        <Card.Title>Create New Drop Box</Card.Title>
+        <Card.Title style={{ fontWeight: "200", fontSize: 30 }}>
+          Create New Drop Box
+        </Card.Title>
+        <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+          Once a drop box is created, users can leave anonymous messages in your
+          drop box. All they need is the drop box code or name.
+        </Card.Title>
         <Card.Title>Your Drop Box Id</Card.Title>
-        <Card.Title style={{ fontSize: 30 }}>{dropBoxId}</Card.Title>
+        <Card.Title style={{ fontWeight: "200", fontSize: 30 }}>
+          {dropBoxId}
+        </Card.Title>
         <Card.Title>Your Drop Box Name</Card.Title>
         <Input
           placeholder="The name of your drop box"
@@ -29,34 +36,16 @@ export default function CreateDropBox({ navigation }) {
         />
         <Card.Title>Your Drop Box Question</Card.Title>
         <Input
-          placeholder="The question you want answered."
+          placeholder="The question you want to ask."
           onChangeText={(Text) => {
             setdropBoxQuestion(Text);
           }}
         />
-        <Card.Title>
-          Drop Box Password (used to check messages later)
-        </Card.Title>
+        <Card.Title>Drop Box Password (Only you will use this.)</Card.Title>
         <Input
           placeholder="Drop Box Password"
           onChangeText={(Text) => {
             setDropBoxPassword(Text);
-          }}
-        />
-        <Card.Title>
-          Your Email (Where we'll send your drop box info){" "}
-        </Card.Title>
-        <Input
-          placeholder="Your Email"
-          onChangeText={(Text) => {
-            setDropBoxUserEmail(Text);
-          }}
-        />
-        <Card.Title>Add A Location(Optional)</Card.Title>
-        <Input
-          placeholder="Location Of Drop Box"
-          onChangeText={(Text) => {
-            setDropBoxLocation(Text);
           }}
         />
         <Button
@@ -71,6 +60,7 @@ export default function CreateDropBox({ navigation }) {
               dropBoxLocation
             );
             if (success && success === true) {
+              // add a page for the creator to screenshot the info, before viewing the drop box.
               navigation.navigate("View Drop Box", {
                 dropBoxId: dropBoxId,
                 dropBoxPassword: dropBoxPassword,

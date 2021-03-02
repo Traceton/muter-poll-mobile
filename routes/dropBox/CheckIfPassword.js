@@ -12,7 +12,7 @@ import {
 } from "../../_appConfig/Theme";
 export default function CreateOrAnswer({ navigation, route }) {
   const [dropBoxId, setDropBoxId] = useState(route.params.dropBoxId);
-  const [dropBoxPassword, setDropBoxPassword] = useState("Hello");
+  const [dropBoxPassword, setDropBoxPassword] = useState(null);
   const [dropBoxAnswer, setDropBoxAnswer] = useState(null);
   return (
     <ScrollView

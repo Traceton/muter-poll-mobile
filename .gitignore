@@ -11,4 +11,3 @@ web-build/
 .env
 # macOS
 .DS_Store
-_appConfig/ApiConfig.js

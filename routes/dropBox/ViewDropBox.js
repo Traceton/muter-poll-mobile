@@ -61,17 +61,22 @@ export default function ViewDropBox({ navigation, route }) {
             justifyContent: "space-around",
           }}
         >
-          <Card.Title style={{ fontSize: 25 }}>
+          <Card.Title style={{ fontWeight: "200", fontSize: 25 }}>
             {dropBox.dropBoxName}
           </Card.Title>
-          <Card.Title style={{ fontSize: 20 }}>{dropBox.dropBoxId}</Card.Title>
+          <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+            {dropBox.dropBoxQuestion}
+          </Card.Title>
+          <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+            {dropBox.dropBoxId}
+          </Card.Title>
           <Button
             buttonStyle={{
-              backgroundColor: "#333",
+              backgroundColor: pageBackgroundColor,
               marginVertical: 5,
             }}
-            type="outline"
-            title="Sms"
+            type="solid"
+            title="Share Drop Box"
             onPress={async () => {
               sendNewDropBoxSmsNotification(
                 dropBox.dropBoxId,
@@ -81,15 +86,16 @@ export default function ViewDropBox({ navigation, route }) {
             }}
           />
           <Button
-            buttonStyle={{ backgroundColor: "#333", marginVertical: 5 }}
-            type="outline"
-            title="Email"
+            buttonStyle={{
+              backgroundColor: pageBackgroundColor,
+              marginVertical: 5,
+            }}
+            type="solid"
+            title="Save Drop Box Info"
             onPress={async () => {
-              sendNewDropBoxEmailNotification(
-                dropBox.dropBoxId,
-                dropBox.dropBoxName,
-                dropBox.dropBoxLocation
-              );
+              navigation.navigate("Save Info", {
+                dropBox: dropBox,
+              });
             }}
           />
           <Button
@@ -109,7 +115,7 @@ export default function ViewDropBox({ navigation, route }) {
   } else {
     displayedDropBox = <Text> Sorry no drop box was found</Text>;
   }
-
+  // answers should not be displayed until at least 2 people have left messages.
   let displayedAnswers = [];
   if (
     dropBoxAnswersFromApi != null &&
@@ -125,10 +131,9 @@ export default function ViewDropBox({ navigation, route }) {
               borderRadius: 10,
             }}
           >
-            <Card.Title style={{ fontSize: 20 }}>
+            <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
               {answer.dropBoxAnswer}
             </Card.Title>
-            <Card.Title style={{ fontSize: 15 }}>{answer.createdOn}</Card.Title>
           </Card>
         </ScrollView>
       );
@@ -142,7 +147,7 @@ export default function ViewDropBox({ navigation, route }) {
             borderRadius: 10,
           }}
         >
-          <Card.Title style={{ fontSize: 20 }}>
+          <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
             Nobody has answered this poll yet :)
           </Card.Title>
         </Card>
@@ -161,12 +166,14 @@ export default function ViewDropBox({ navigation, route }) {
         {displayedDropBox}
         <Divider
           style={{
-            marginVertical: 30,
+            marginVertical: 10,
             marginHorizontal: 15,
             backgroundColor: "black",
           }}
         />
-        {displayedAnswers}
+        <ScrollView contentContainerStyle={{ marginVertical: 10 }}>
+          {displayedAnswers}
+        </ScrollView>
       </View>
     </ScrollView>
   );

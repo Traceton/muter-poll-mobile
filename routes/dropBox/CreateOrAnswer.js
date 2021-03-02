@@ -8,7 +8,7 @@ import {
   cardTextColor,
 } from "../../_appConfig/Theme";
 export default function CreateOrAnswer({ navigation }) {
-  const [dropBoxId, setDropBoxId] = useState("7128");
+  const [dropBoxId, setDropBoxId] = useState(null);
 
   return (
     <ScrollView
@@ -21,14 +21,15 @@ export default function CreateOrAnswer({ navigation }) {
       <Card
         containerStyle={{
           borderRadius: 10,
-          height: "60%",
           justifyContent: "space-around",
         }}
       >
-        <Card.Title>Already have a Drop Box Code?</Card.Title>
+        <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+          Answer a question or view your drop box anonymous answers.
+        </Card.Title>
         <Input
-          label="Drop Box Code"
-          placeholder="Code Here"
+          // label="Drop Box Code or Name"
+          placeholder="Drop Box Code or Name here"
           style={{ marginVertical: 10 }}
           onChangeText={(Text) => {
             setDropBoxId(Text);
@@ -52,9 +53,13 @@ export default function CreateOrAnswer({ navigation }) {
           }}
         />
         <Divider style={{ backgroundColor: "#333", marginVertical: 30 }} />
+        <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+          Ask a question and recieve a link to share with others, who can then
+          answer anonymously.
+        </Card.Title>
         <Button
           title="Create New Drop Box"
-          type="outline"
+          type="solid"
           buttonStyle={{ marginVertical: 30 }}
           onPress={() => {
             navigation.navigate("Create Drop Box");
