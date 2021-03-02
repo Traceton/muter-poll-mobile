@@ -76,7 +76,7 @@ export default function ViewDropBox({ navigation, route }) {
               marginVertical: 5,
             }}
             type="solid"
-            title="Share Drop Box"
+            title="Share Drop Box "
             onPress={async () => {
               sendNewDropBoxSmsNotification(
                 dropBox.dropBoxId,
@@ -115,12 +115,13 @@ export default function ViewDropBox({ navigation, route }) {
   } else {
     displayedDropBox = <Text> Sorry no drop box was found</Text>;
   }
-  // answers should not be displayed until at least 2 people have left messages.
+
   let displayedAnswers = [];
   if (
     dropBoxAnswersFromApi != null &&
     dropBoxAnswersFromApi != undefined &&
-    dropBoxAnswersFromApi.length > 0
+    // answers should not be displayed until at least 2 people have left messages.
+    dropBoxAnswersFromApi.length >= 2
   ) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
@@ -148,7 +149,7 @@ export default function ViewDropBox({ navigation, route }) {
           }}
         >
           <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
-            Nobody has answered this poll yet :)
+            At least 2 people must answer before you can see their responses.
           </Card.Title>
         </Card>
       </ScrollView>
