@@ -1,9 +1,9 @@
-import { API } from "@env";
+import { API } from "../_appConfig/ApiConfig";
 
 export let checkIfDropBoxIdIsValid = async (dropBoxId) => {
   return true;
 };
-
+// console.log(`is production from env -> ${ISPRODUCTION}`);
 export let checkIfDropBoxIdAndPasswordIsValid = async (
   dropBoxId,
   dropBoxPassword
@@ -14,12 +14,14 @@ export let checkIfDropBoxIdAndPasswordIsValid = async (
 export let createNewDropBox = async (
   dropBoxId,
   dropBoxName,
+  dropBoxQuestion,
   dropBoxPassword,
   dropBoxLocation
 ) => {
-  const newBox = {
+  const newBox = await {
     dropBoxId: dropBoxId,
     dropBoxName: dropBoxName,
+    dropBoxQuestion: dropBoxQuestion,
     dropBoxPassword: dropBoxPassword,
     dropBoxLocation: dropBoxLocation,
   };
@@ -55,8 +57,12 @@ export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
     )
       .then((response) => response.json())
       .then((data) => (dataFromApi = data));
+    if (dataFromApi != null) {
+      // console.log("drop box found");
+    }
     return dataFromApi;
   } catch (error) {
+    // console.log(dataFromApi); returning undefines here
     return false;
   }
 };

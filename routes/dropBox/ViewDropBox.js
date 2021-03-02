@@ -13,7 +13,6 @@ import {
   getDropBoxAnswersByIdAndPassword,
   deleteDropBox,
 } from "../../api/dropBoxApi";
-import { API } from "@env";
 import { sendNewDropBoxEmailNotification } from "../../api/email";
 import { sendNewDropBoxSmsNotification } from "../../api/sms";
 import {
@@ -32,16 +31,18 @@ export default function ViewDropBox({ navigation, route }) {
         dropBoxId,
         dropBoxPassword
       );
-      setDropBoxFromApi(dataFromApi);
-      console.log(dataFromApi);
+      if (dataFromApi) {
+        setDropBoxFromApi(dataFromApi);
+      }
     };
     let getAnswers = async () => {
       const dataFromApi = await getDropBoxAnswersByIdAndPassword(
         dropBoxId,
         dropBoxPassword
       );
-      await setDropBoxAnswersFromApi(dataFromApi);
-      console.log(dataFromApi);
+      if (dataFromApi) {
+        await setDropBoxAnswersFromApi(dataFromApi);
+      }
     };
 
     getDropBox();
@@ -50,33 +51,10 @@ export default function ViewDropBox({ navigation, route }) {
 
   let displayedDropBox;
 
-  if (dropBoxFromApi !== null && dropBoxAnswersFromApi !== undefined) {
+  if (dropBoxFromApi != null && dropBoxFromApi != undefined) {
     let dropBox = dropBoxFromApi;
     displayedDropBox = (
-      <ScrollView
-        contentContainerStyle={
-          {
-            // marginVertical: 20,
-            // height: "50%",
-            // justifyContent: "center",
-            // alignContent: "center",
-            // alignItems: "center",
-          }
-        }
-      >
-        {/* <Tile
-          imageSrc={{
-            uri:
-              "https://images.unsplash.com/photo-1608311820732-36092cc3470a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=582&q=80",
-          }}
-          title={dropBox.dropBoxName}
-          titleStyle={{ fontSize: 35 }}
-          activeOpacity={10}
-          height={500}
-          featured
-          caption={dropBox.dropBoxId}
-          captionStyle={{ fontSize: 20 }}
-        /> */}
+      <ScrollView>
         <Card
           containerStyle={{
             borderRadius: 10,
@@ -93,7 +71,7 @@ export default function ViewDropBox({ navigation, route }) {
               marginVertical: 5,
             }}
             type="outline"
-            title="Notify Others by Sms"
+            title="Sms"
             onPress={async () => {
               sendNewDropBoxSmsNotification(
                 dropBox.dropBoxId,
@@ -105,7 +83,7 @@ export default function ViewDropBox({ navigation, route }) {
           <Button
             buttonStyle={{ backgroundColor: "#333", marginVertical: 5 }}
             type="outline"
-            title="Notify Others by Email"
+            title="Email"
             onPress={async () => {
               sendNewDropBoxEmailNotification(
                 dropBox.dropBoxId,
@@ -129,27 +107,18 @@ export default function ViewDropBox({ navigation, route }) {
       </ScrollView>
     );
   } else {
-    displayedDropBox = <Text></Text>;
+    displayedDropBox = <Text> Sorry no drop box was found</Text>;
   }
 
   let displayedAnswers = [];
-  if (dropBoxAnswersFromApi !== null && dropBoxAnswersFromApi !== undefined) {
+  if (
+    dropBoxAnswersFromApi != null &&
+    dropBoxAnswersFromApi != undefined &&
+    dropBoxAnswersFromApi.length > 0
+  ) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
-          {/* <ListItem
-            containerStyle={{ backgroundColor: pageBackgroundColor }}
-            bottomDivider
-          >
-            <ListItem.Content>
-              <ListItem.Title style={{ color: "white" }}>
-                {answer.dropBoxAnswer}
-              </ListItem.Title>
-              <ListItem.Subtitle style={{ color: "white" }}>
-                {answer.createdOn}
-              </ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem> */}
           <Card
             containerStyle={{
               backgroundColor: cardBackgroundColor,
@@ -165,7 +134,20 @@ export default function ViewDropBox({ navigation, route }) {
       );
     });
   } else {
-    displayedAnswers = <Text></Text>;
+    displayedAnswers = (
+      <ScrollView>
+        <Card
+          containerStyle={{
+            backgroundColor: cardBackgroundColor,
+            borderRadius: 10,
+          }}
+        >
+          <Card.Title style={{ fontSize: 20 }}>
+            Nobody has answered this poll yet :)
+          </Card.Title>
+        </Card>
+      </ScrollView>
+    );
   }
 
   return (

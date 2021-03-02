@@ -1,3 +1,4 @@
+import { API } from "./_appConfig/ApiConfig";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,10 +9,10 @@ import CreateSurveyStackManager from "./routes/createSurvey/CreateSurveyStackMan
 import DropBoxStackManager from "./routes/dropBox/DropBoxStackManager";
 const AppTab = createBottomTabNavigator();
 
-//  12/27/2020 - Implement emailJs? send users a link to view their own drop box. and give the drop
 // box creator a way to email anyone a link to leave a message for the dropBox.
 
 export default function App() {
+  // console.log(`api at app.js -> ${API}`); //un-comment this to check current api.
   return (
     <NavigationContainer>
       <AppTab.Navigator
@@ -24,7 +25,7 @@ export default function App() {
         }}
       >
         <AppTab.Screen name="Home" component={HomeStackManager} />
-        <AppTab.Screen name="Drop Box" component={DropBoxStackManager} />
+        <AppTab.Screen name="Silent Poll" component={DropBoxStackManager} />
         {/* <AppTab.Screen name="Take Survey" component={TakeSurveyStackManager} />
         <AppTab.Screen
           name="Create Survey"

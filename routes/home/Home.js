@@ -6,7 +6,7 @@ import { pageBackgroundColor } from "../../_appConfig/Theme";
 export default function Home({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.homeContainer}>
-      <Text style={styles.homeTitle}>Drop Box</Text>
+      <Text style={styles.homeTitle}>Muter Poll</Text>
       <Text style={styles.homeSubtitle}>
         This app is made so that peoples needs or wants can be heard,
         anonymously.
