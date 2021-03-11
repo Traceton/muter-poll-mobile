@@ -1,14 +1,43 @@
 import { API } from "../_appConfig/ApiConfig";
 
-export let checkIfDropBoxIdIsValid = async (dropBoxId) => {
-  return true;
+// Get the basic drop box info if one exists. (code, name, and question only.)
+export let getDropBoxIfValid = async (dropBoxId) => {
+  let publicDropBoxInfo;
+  try {
+    await fetch(`${API}/dropBox/getDropBoxIfValid/${dropBoxId}`)
+      .then((response) => response.json())
+      .then((data) => (publicDropBoxInfo = data));
+    if (publicDropBoxInfo != null) {
+      return publicDropBoxInfo;
+    } else if (publicDropBoxInfo === false) {
+      return false;
+    }
+  } catch (error) {
+    return false;
+  }
 };
-// console.log(`is production from env -> ${ISPRODUCTION}`);
+
 export let checkIfDropBoxIdAndPasswordIsValid = async (
   dropBoxId,
   dropBoxPassword
 ) => {
-  return true;
+  let isValid;
+  try {
+    await fetch(
+      `${API}/dropBox/checkIfDropBoxIdAndPasswordIsValid/${dropBoxId}/${dropBoxPassword}`
+    )
+      .then((response) => response.json())
+      .then((data) => (isValid = data));
+    if (isValid === true) {
+      return true;
+    } else if (isValid === false) {
+      return false;
+    } else {
+      console.log(isValid);
+    }
+  } catch (error) {
+    return false;
+  }
 };
 
 export let createNewDropBox = async (
@@ -26,7 +55,7 @@ export let createNewDropBox = async (
     dropBoxLocation: dropBoxLocation,
   };
   try {
-    return await fetch(`${API}/dropBox/createNewDropBox`, {
+    await fetch(`${API}/dropBox/createNewDropBox`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

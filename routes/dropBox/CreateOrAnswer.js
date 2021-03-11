@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
-import { checkIfDropBoxIdIsValid } from "../../api/dropBoxApi";
+import { getDropBoxIfValid } from "../../api/dropBoxApi";
 import {
   pageBackgroundColor,
   cardBackgroundColor,
@@ -28,8 +28,8 @@ export default function CreateOrAnswer({ navigation }) {
           Answer a question or view your drop box anonymous answers.
         </Card.Title>
         <Input
-          // label="Drop Box Code or Name"
-          placeholder="Drop Box Code or Name here"
+          // label="Drop Box Code"
+          placeholder="Drop Box Code here"
           style={{ marginVertical: 10 }}
           onChangeText={(Text) => {
             setDropBoxId(Text);
@@ -41,11 +41,14 @@ export default function CreateOrAnswer({ navigation }) {
           buttonStyle={{ marginVertical: 10 }}
           onPress={async () => {
             if (dropBoxId != null && dropBoxId != undefined) {
-              let valid = await checkIfDropBoxIdIsValid(dropBoxId);
-              if (valid === true) {
+              let publicDropBoxInfo = await getDropBoxIfValid(dropBoxId);
+              if (publicDropBoxInfo) {
                 navigation.navigate("Check If Password", {
                   dropBoxId: dropBoxId,
+                  publicDropBoxInfo: publicDropBoxInfo,
                 });
+              } else if (publicDropBoxInfo === false) {
+                alert("No drop box was found, please check your code.");
               }
             } else {
               alert("Drop Box Code Required");
