@@ -66,24 +66,25 @@ export let createNewDropBox = async (
   dropBoxPassword,
   dropBoxLocation
 ) => {
-  const newBox = await {
+  const newBox = await JSON.stringify({
     dropBoxId: dropBoxId,
     dropBoxName: dropBoxName,
     dropBoxQuestion: dropBoxQuestion,
     dropBoxPassword: dropBoxPassword,
     dropBoxLocation: dropBoxLocation,
+  });
+
+  const headers = {
+    "Content-Type": "application/json",
   };
 
   let finalResponse;
   let finalError;
 
-  fetch(`${API}/dropBox/createNewDropBox`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newBox),
-  })
+  await axios
+    .post(`${API}/dropBox/createNewDropBox`, newBox, {
+      headers,
+    })
     .then(async (response) => {
       finalResponse = await createResponse(response);
     })
@@ -112,21 +113,20 @@ export let sendDropBoxConfirmationEmail = async (
     Your drop box name is ${dropBoxName}.
      Your drop box question is "${dropBoxQuestion}?"
       Your drop box password is ${dropBoxPassword}`;
-  const newBox = await {
+
+  const newBox = await JSON.stringify({
     to: to,
     subject: "New Muter Poll drop box",
     text: text,
-  };
+  });
+
   let finalResponse;
   let finalError;
 
-  await fetch(`${API}/dropBox/sendUserDropBoxEmail`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newBox),
-  })
+  await axios
+    .post(`${API}/dropBox/sendUserDropBoxEmail`, newBox, {
+      headers,
+    })
     .then(async (response) => {
       finalResponse = await createResponse(response);
     })
@@ -146,16 +146,14 @@ export let getDropBoxByIdAndPassword = async (dropBoxId, dropBoxPassword) => {
   let finalResponse;
   let finalError;
 
-  await fetch(
-    `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  const basicRequest = await axios.create({
+    timeout: 1000,
+  });
+
+  await basicRequest
+    .get(
+      `${API}/dropBox/getDropBoxByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
+    )
     .then(async (response) => {
       finalResponse = await createResponse(response);
     })
@@ -178,16 +176,14 @@ export let getDropBoxAnswersByIdAndPassword = async (
   let finalResponse;
   let finalError;
 
-  await fetch(
-    `${API}/dropBox/getAnswersByIdAndPassword/${dropBoxId}/${dropBoxPassword}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  const basicRequest = await axios.create({
+    timeout: 1000,
+  });
+
+  await basicRequest
+    .get(
+      `${API}/dropBox/getAnswersByIdAndPassword/${dropBoxId}/${dropBoxPassword}`
+    )
     .then(async (response) => {
       finalResponse = await createResponse(response);
     })
@@ -239,15 +235,14 @@ export let deleteDropBox = async (dropBoxId, dropBoxPassword) => {
   let finalResponse;
   let finalError;
 
-  return await fetch(
-    `${API}/dropBox/deleteDropBox/${dropBoxId}/${dropBoxPassword}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  )
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  await axios
+    .delete(`${API}/dropBox/deleteDropBox/${dropBoxId}/${dropBoxPassword}`, {
+      headers,
+    })
     .then(async (response) => {
       finalResponse = await createResponse(response);
     })

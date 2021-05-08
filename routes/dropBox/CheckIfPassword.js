@@ -59,11 +59,8 @@ export default function CreateOrAnswer({ navigation, route }) {
             title="Leave Message"
             type="solid"
             onPress={async () => {
-              let valid = await createNewDropBoxAnswer(
-                dropBoxId,
-                dropBoxAnswer
-              );
-              if (valid === true) {
+              let res = await createNewDropBoxAnswer(dropBoxId, dropBoxAnswer);
+              if (res.messageType === "success") {
                 alert("thanks for your message!");
                 navigation.navigate("Create Or Answer");
               }
@@ -90,17 +87,15 @@ export default function CreateOrAnswer({ navigation, route }) {
             buttonStyle={{}}
             onPress={async () => {
               if (dropBoxPassword != null && dropBoxPassword != undefined) {
-                const isValid = await checkIfDropBoxIdAndPasswordIsValid(
+                const res = await checkIfDropBoxIdAndPasswordIsValid(
                   dropBoxId,
                   dropBoxPassword
                 );
-                if (isValid === true) {
+                if (res.messageType === "success") {
                   navigation.navigate("View Drop Box", {
                     dropBoxId: dropBoxId,
                     dropBoxPassword: dropBoxPassword,
                   });
-                } else if (isValid === false) {
-                  alert("Password is incorrect.");
                 } else {
                   // console.log(isValid);
                   alert("something went wrong, please try again soon :)");

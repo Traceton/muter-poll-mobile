@@ -63,7 +63,7 @@ export default function CreateDropBox({ navigation }) {
           type="solid"
           title="Create Drop Box"
           onPress={async () => {
-            const success = await createNewDropBox(
+            const res = await createNewDropBox(
               userEmail,
               dropBoxId,
               dropBoxName,
@@ -71,8 +71,8 @@ export default function CreateDropBox({ navigation }) {
               dropBoxPassword,
               dropBoxLocation
             );
-            // alert(JSON.stringify(success));
-            if (success && success === true) {
+
+            if (res.messageType === "success") {
               navigation.navigate("View Drop Box", {
                 dropBoxId: dropBoxId,
                 dropBoxPassword: dropBoxPassword,

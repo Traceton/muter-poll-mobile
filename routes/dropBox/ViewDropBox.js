@@ -27,21 +27,18 @@ export default function ViewDropBox({ navigation, route }) {
   const [dropBoxAnswersFromApi, setDropBoxAnswersFromApi] = useState(null);
   useEffect(() => {
     let getDropBox = async () => {
-      const dataFromApi = await getDropBoxByIdAndPassword(
-        dropBoxId,
-        dropBoxPassword
-      );
-      if (dataFromApi) {
-        setDropBoxFromApi(dataFromApi);
+      const res = await getDropBoxByIdAndPassword(dropBoxId, dropBoxPassword);
+      if (res.messageType === "success") {
+        setDropBoxFromApi(res.fullResponse.data.dropBox);
       }
     };
     let getAnswers = async () => {
-      const dataFromApi = await getDropBoxAnswersByIdAndPassword(
+      const res = await getDropBoxAnswersByIdAndPassword(
         dropBoxId,
         dropBoxPassword
       );
-      if (dataFromApi) {
-        await setDropBoxAnswersFromApi(dataFromApi);
+      if (res.messageType === "success") {
+        await setDropBoxAnswersFromApi(res.fullResponse.data.answers);
       }
     };
 
@@ -103,8 +100,8 @@ export default function ViewDropBox({ navigation, route }) {
             type="solid"
             title="Hold To Delete Drop Box"
             onLongPress={async () => {
-              let deleted = await deleteDropBox(dropBoxId, dropBoxPassword);
-              if (deleted) {
+              let res = await deleteDropBox(dropBoxId, dropBoxPassword);
+              if (res.messageType === "success") {
                 navigation.navigate("Create Or Answer");
               }
             }}
