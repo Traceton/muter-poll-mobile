@@ -12,6 +12,7 @@ export default function CreateDropBox({ navigation }) {
   const [dropBoxQuestion, setdropBoxQuestion] = useState(null);
   const [dropBoxPassword, setDropBoxPassword] = useState(null);
   const [dropBoxLocation, setDropBoxLocation] = useState(null);
+  const [userEmail, setuserEmail] = useState(null);
 
   return (
     <ScrollView>
@@ -48,19 +49,30 @@ export default function CreateDropBox({ navigation }) {
             setDropBoxPassword(Text);
           }}
         />
+
+        <Card.Title>
+          Your Email (used to send you your drop box info.)
+        </Card.Title>
+        <Input
+          placeholder="Your Email"
+          onChangeText={(Text) => {
+            setuserEmail(Text);
+          }}
+        />
         <Button
           type="solid"
           title="Create Drop Box"
           onPress={async () => {
             const success = await createNewDropBox(
+              userEmail,
               dropBoxId,
               dropBoxName,
               dropBoxQuestion,
               dropBoxPassword,
               dropBoxLocation
             );
+            // alert(JSON.stringify(success));
             if (success && success === true) {
-              // add a page for the creator to screenshot the info, before viewing the drop box.
               navigation.navigate("View Drop Box", {
                 dropBoxId: dropBoxId,
                 dropBoxPassword: dropBoxPassword,

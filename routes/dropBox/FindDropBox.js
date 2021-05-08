@@ -11,6 +11,8 @@ import {
   checkIfDropBoxIdAndPasswordIsValid,
   createNewDropBoxAnswer,
 } from "../../api/dropBoxApi";
+
+// 53987
 export default function FindDropBox({ navigation, route }) {
   const { requiresPassword } = route.params;
   const [dropBoxId, setDropBoxId] = useState(null);
@@ -46,20 +48,18 @@ export default function FindDropBox({ navigation, route }) {
           title="Find drop box"
           onPress={async () => {
             if (dropBoxPassword != null && dropBoxPassword != undefined) {
-              const isValid = await checkIfDropBoxIdAndPasswordIsValid(
+              const res = await checkIfDropBoxIdAndPasswordIsValid(
                 dropBoxId,
                 dropBoxPassword
               );
-              if (isValid === true) {
+
+              if (res.messageType === "success") {
                 navigation.navigate("View Drop Box", {
                   dropBoxId: dropBoxId,
                   dropBoxPassword: dropBoxPassword,
                 });
-              } else if (isValid === false) {
+              } else if (res.messageType !== "success") {
                 alert("Password is incorrect.");
-              } else {
-                // console.log(isValid);
-                alert("something went wrong, please try again soon :)");
               }
             } else {
               alert("Drop Box Id And Password Required");
@@ -91,13 +91,15 @@ export default function FindDropBox({ navigation, route }) {
           title="Find drop box"
           onPress={async () => {
             if (dropBoxId != null && dropBoxId != undefined) {
-              let publicDropBoxInfo = await getDropBoxIfValid(dropBoxId);
-              if (publicDropBoxInfo) {
+              let res = await getDropBoxIfValid(dropBoxId);
+              if (res.messageType === "success") {
                 navigation.navigate("Answer Drop Box", {
-                  publicDropBoxInfo: publicDropBoxInfo,
+                  publicDropBoxInfo: res.fullResponse.data.publicDropBoxInfo,
                 });
-              } else if (publicDropBoxInfo === false) {
-                alert("No drop box was found, please check your code.");
+              } else if (res.messageType !== "success") {
+                alert(
+                  "No drop box was found, please check your drop box id code."
+                );
               }
             } else {
               alert("Drop Box Code Required");

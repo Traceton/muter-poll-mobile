@@ -1,7 +1,7 @@
 // currently included in the git ignore file.
 
-const ENVIROMENT = "test";
-const ATLAS = "https://react-store-node-api.herokuapp.com/workplaceSurveys";
+const ENVIROMENT = "development";
+const ATLAS = "https://react-store-node-api.herokuapp.com/muterPolls";
 
 import { Platform } from "react-native";
 
@@ -19,6 +19,6 @@ if (ENVIROMENT === "production") {
   API = ATLAS;
   // console.log("running in test mode!");
 } else if (ENVIROMENT === "development") {
-  API = `http://${localConfig.server}:3001/workplaceSurveys`;
+  API = `http://${localConfig.server}:3001/muterPolls`;
 }
 // add a test to determine if the api is connected correctly.

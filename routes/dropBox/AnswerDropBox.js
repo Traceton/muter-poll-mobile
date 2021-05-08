@@ -31,12 +31,11 @@ export default function AnswerDropBox({ navigation, route }) {
           type="solid"
           title="Submit your reply."
           onPress={async () => {
-            let valid = await createNewDropBoxAnswer(
+            let res = await createNewDropBoxAnswer(
               publicDropBoxInfo.dropBoxId,
               dropBoxAnswer
             );
-            if (valid === true) {
-              alert("thanks for your message!");
+            if (res.messageType === "success") {
               navigation.navigate("New Or View");
             }
           }}
