@@ -1,6 +1,6 @@
 // currently included in the git ignore file.
 
-const ENVIROMENT = "development";
+const ENVIROMENT = "test";
 const ATLAS = "https://react-store-node-api.herokuapp.com/muterPolls";
 
 import { Platform } from "react-native";
