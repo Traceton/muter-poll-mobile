@@ -67,7 +67,7 @@ export default function FindDropBox({ navigation, route }) {
                 alertHandler(res);
               }
             } else {
-              alert("Drop Box Id And Password Required");
+              alert("Drop Box Code And Password Required");
             }
           }}
         />
