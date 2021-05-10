@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
 import { createNewDropBox } from "../../api/dropBoxApi";
-// import { API } from "@env";
+import { alertHandler } from "../../services/alertService";
 export default function CreateDropBox({ navigation }) {
   const [dropBoxId, setDropBoxId] = useState(
     Math.ceil(Math.random() * 1000) + Math.ceil(Math.random() * 100).toString()
@@ -63,20 +63,33 @@ export default function CreateDropBox({ navigation }) {
           type="solid"
           title="Create Drop Box"
           onPress={async () => {
-            const res = await createNewDropBox(
-              userEmail,
+            if (
+              (userEmail,
               dropBoxId,
               dropBoxName,
               dropBoxQuestion,
               dropBoxPassword,
-              dropBoxLocation
-            );
+              dropBoxLocation)
+            ) {
+              const res = await createNewDropBox(
+                userEmail,
+                dropBoxId,
+                dropBoxName,
+                dropBoxQuestion,
+                dropBoxPassword,
+                dropBoxLocation
+              );
 
-            if (res.messageType === "success") {
-              navigation.navigate("View Drop Box", {
-                dropBoxId: dropBoxId,
-                dropBoxPassword: dropBoxPassword,
-              });
+              if (res && res.messageType === "success") {
+                navigation.navigate("View Drop Box", {
+                  dropBoxId: dropBoxId,
+                  dropBoxPassword: dropBoxPassword,
+                });
+              } else if (res && res.messageType !== "success") {
+                alertHandler(res);
+              }
+            } else {
+              alert("Please fill all fields.");
             }
           }}
         />

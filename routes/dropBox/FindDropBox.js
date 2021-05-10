@@ -11,12 +11,14 @@ import {
   checkIfDropBoxIdAndPasswordIsValid,
   createNewDropBoxAnswer,
 } from "../../api/dropBoxApi";
+import { alertHandler } from "../../services/alertService";
 
 // 53987
 export default function FindDropBox({ navigation, route }) {
   const { requiresPassword } = route.params;
   const [dropBoxId, setDropBoxId] = useState(null);
   const [dropBoxPassword, setDropBoxPassword] = useState(null);
+  const [message, setMessage] = useState(<Text></Text>);
 
   let findDropBoxForm;
   if (requiresPassword) {
@@ -26,6 +28,9 @@ export default function FindDropBox({ navigation, route }) {
       >
         <Card.Title style={{ fontWeight: "200", fontSize: 35 }}>
           Please enter your drop box code below.
+        </Card.Title>
+        <Card.Title style={{ fontWeight: "200", fontSize: 35 }}>
+          {message}
         </Card.Title>
         <Input
           // label="Drop Box Code"
@@ -59,7 +64,7 @@ export default function FindDropBox({ navigation, route }) {
                   dropBoxPassword: dropBoxPassword,
                 });
               } else if (res.messageType !== "success") {
-                alert("Password is incorrect.");
+                alertHandler(res);
               }
             } else {
               alert("Drop Box Id And Password Required");
@@ -97,9 +102,7 @@ export default function FindDropBox({ navigation, route }) {
                   publicDropBoxInfo: res.fullResponse.data.publicDropBoxInfo,
                 });
               } else if (res.messageType !== "success") {
-                alert(
-                  "No drop box was found, please check your drop box id code."
-                );
+                alertHandler(res);
               }
             } else {
               alert("Drop Box Code Required");

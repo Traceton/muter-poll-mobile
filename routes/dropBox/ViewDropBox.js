@@ -20,6 +20,7 @@ import {
   cardBackgroundColor,
   cardTextColor,
 } from "../../_appConfig/Theme";
+import { alertHandler } from "../../services/alertService";
 
 export default function ViewDropBox({ navigation, route }) {
   const { dropBoxId, dropBoxPassword } = route.params;
@@ -30,6 +31,8 @@ export default function ViewDropBox({ navigation, route }) {
       const res = await getDropBoxByIdAndPassword(dropBoxId, dropBoxPassword);
       if (res.messageType === "success") {
         setDropBoxFromApi(res.fullResponse.data.dropBox);
+      } else {
+        alertHandler(res);
       }
     };
     let getAnswers = async () => {
@@ -38,7 +41,9 @@ export default function ViewDropBox({ navigation, route }) {
         dropBoxPassword
       );
       if (res.messageType === "success") {
-        await setDropBoxAnswersFromApi(res.fullResponse.data.answers);
+        setDropBoxAnswersFromApi(res.fullResponse.data.answers);
+      } else {
+        alertHandler(res);
       }
     };
 
@@ -103,6 +108,8 @@ export default function ViewDropBox({ navigation, route }) {
               let res = await deleteDropBox(dropBoxId, dropBoxPassword);
               if (res.messageType === "success") {
                 navigation.navigate("Create Or Answer");
+              } else {
+                alertHandler(res);
               }
             }}
           />

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { Button, Card, Input, Divider } from "react-native-elements";
 import { createNewDropBoxAnswer } from "../../api/dropBoxApi";
+import { alertHandler } from "../../services/alertService";
 
 export default function AnswerDropBox({ navigation, route }) {
   const { publicDropBoxInfo } = route.params;
@@ -31,12 +32,18 @@ export default function AnswerDropBox({ navigation, route }) {
           type="solid"
           title="Submit your reply."
           onPress={async () => {
-            let res = await createNewDropBoxAnswer(
-              publicDropBoxInfo.dropBoxId,
-              dropBoxAnswer
-            );
-            if (res.messageType === "success") {
-              navigation.navigate("New Or View");
+            if (dropBoxAnswer) {
+              let res = await createNewDropBoxAnswer(
+                publicDropBoxInfo.dropBoxId,
+                dropBoxAnswer
+              );
+              if (res && res.messageType === "success") {
+                navigation.navigate("New Or View");
+              } else if (res && res.messageType !== "success") {
+                alertHandler(res);
+              }
+            } else {
+              alert("Please fill all fields");
             }
           }}
         />

@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import CheckIfPassword from "./CheckIfPassword";
 import ViewDropBox from "./ViewDropBox";
 import CreateDropBox from "./CreateDropBox";
 import ScreenshotSuggestion from "./ScreenshotSuggestion";
