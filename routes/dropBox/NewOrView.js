@@ -10,11 +10,11 @@ export default function NewOrView({ navigation }) {
   return (
     <ScrollView
       contentContainerStyle={{
-        minHeight: "100%",
+        minHeight: "90%",
       }}
     >
       <Card
-        containerStyle={{ justifyContent: "space-around", minHeight: "100%" }}
+        containerStyle={{ justifyContent: "space-around", minHeight: "95%" }}
       >
         <Card.Title style={{ fontWeight: "200", fontSize: 35 }}>
           Would you like to answer a drop box or create a new one?

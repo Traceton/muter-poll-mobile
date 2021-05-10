@@ -170,7 +170,7 @@ export default function ViewDropBox({ navigation, route }) {
   return (
     <ScrollView
       contentContainerStyle={{
-        minHeight: "100%",
+        minHeight: "90%",
       }}
     >
       <View>

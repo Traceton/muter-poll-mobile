@@ -15,7 +15,11 @@ export default function CreateDropBox({ navigation }) {
   const [userEmail, setuserEmail] = useState(null);
 
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        minHeight: "90%",
+      }}
+    >
       <Card>
         <Card.Title style={{ fontWeight: "200", fontSize: 30 }}>
           Create New Drop Box
