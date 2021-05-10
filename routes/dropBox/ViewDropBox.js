@@ -21,6 +21,7 @@ import {
   cardTextColor,
 } from "../../_appConfig/Theme";
 import { alertHandler } from "../../services/alertService";
+import { Alert } from "react-native";
 
 export default function ViewDropBox({ navigation, route }) {
   const { dropBoxId, dropBoxPassword } = route.params;
@@ -59,45 +60,61 @@ export default function ViewDropBox({ navigation, route }) {
       <ScrollView>
         <Card
           containerStyle={{
-            borderRadius: 10,
             justifyContent: "space-around",
           }}
         >
-          <Card.Title style={{ fontWeight: "200", fontSize: 25 }}>
+          <Card.Title style={{ fontWeight: "200", fontSize: 30 }}>
             {dropBox.dropBoxName}
+          </Card.Title>
+          <Card.Title style={{ fontWeight: "200", fontSize: 25 }}>
+            {dropBox.dropBoxId}
           </Card.Title>
           <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
             {dropBox.dropBoxQuestion}
           </Card.Title>
-          <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
-            {dropBox.dropBoxId}
-          </Card.Title>
+
           <Button
             buttonStyle={{
-              backgroundColor: pageBackgroundColor,
               marginVertical: 5,
             }}
-            type="solid"
-            title="Share Drop Box "
-            onPress={async () => {
-              sendNewDropBoxSmsNotification(
-                dropBox.dropBoxId,
-                dropBox.dropBoxName,
-                dropBox.dropBoxLocation
+            type="outline"
+            title="Share Drop Box"
+            onPress={() => {
+              // navigation.navigate("Save Info", {
+              //   dropBox: dropBox,
+              // });
+
+              Alert.alert(
+                "Share Drop Box",
+                "Please choose a method of sharing.",
+                [
+                  {
+                    text: "Text",
+                    onPress: () =>
+                      sendNewDropBoxSmsNotification(
+                        dropBox.dropBoxId,
+                        dropBox.dropBoxName,
+                        dropBox.dropBoxLocation
+                      ),
+                  },
+                  {
+                    text: "Email",
+                    onPress: () =>
+                      sendNewDropBoxEmailNotification(
+                        dropBox.dropBoxId,
+                        dropBox.dropBoxName,
+                        dropBox.dropBoxLocation
+                      ),
+                  },
+                  {
+                    text: "Cancel",
+                    style: "cancel",
+                  },
+                ],
+                {
+                  cancelable: true,
+                }
               );
-            }}
-          />
-          <Button
-            buttonStyle={{
-              backgroundColor: pageBackgroundColor,
-              marginVertical: 5,
-            }}
-            type="solid"
-            title="Save Drop Box Info"
-            onPress={async () => {
-              navigation.navigate("Save Info", {
-                dropBox: dropBox,
-              });
             }}
           />
           <Button
@@ -130,13 +147,8 @@ export default function ViewDropBox({ navigation, route }) {
     dropBoxAnswersFromApi.map((answer) => {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
-          <Card
-            containerStyle={{
-              backgroundColor: cardBackgroundColor,
-              borderRadius: 10,
-            }}
-          >
-            <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
+          <Card>
+            <Card.Title style={{ fontWeight: "300", fontSize: 20 }}>
               {answer.dropBoxAnswer}
             </Card.Title>
           </Card>
@@ -146,12 +158,7 @@ export default function ViewDropBox({ navigation, route }) {
   } else {
     displayedAnswers = (
       <ScrollView>
-        <Card
-          containerStyle={{
-            backgroundColor: cardBackgroundColor,
-            borderRadius: 10,
-          }}
-        >
+        <Card>
           <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
             At least 2 people must answer before you can see their responses.
           </Card.Title>
@@ -163,7 +170,6 @@ export default function ViewDropBox({ navigation, route }) {
   return (
     <ScrollView
       contentContainerStyle={{
-        backgroundColor: pageBackgroundColor,
         minHeight: "100%",
       }}
     >

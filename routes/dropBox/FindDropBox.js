@@ -113,5 +113,13 @@ export default function FindDropBox({ navigation, route }) {
     );
   }
 
-  return <ScrollView>{findDropBoxForm}</ScrollView>;
+  return (
+    <ScrollView
+      contentContainerStyle={{
+        minHeight: "100%",
+      }}
+    >
+      {findDropBoxForm}
+    </ScrollView>
+  );
 }

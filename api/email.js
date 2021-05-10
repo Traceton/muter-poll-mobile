@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { Platform, Alert } from "react-native";
 import { Linking } from "react-native";
 
 export let sendNewDropBoxEmailNotification = async (
@@ -16,5 +16,12 @@ export let sendNewDropBoxEmailNotification = async (
   const url = `mailto:${operator}subject=${emailSubject}&body=${
     emailIntro + emailBody
   }`;
-  Linking.openURL(url);
+  try {
+    Linking.openURL(url);
+  } catch (error) {
+    return Alert.alert(
+      "Sorry about that, ",
+      "There was a problem, Please try again."
+    );
+  }
 };

@@ -8,7 +8,11 @@ import {
 } from "../../_appConfig/Theme";
 export default function NewOrView({ navigation }) {
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        minHeight: "100%",
+      }}
+    >
       <Card
         containerStyle={{ justifyContent: "space-around", minHeight: "100%" }}
       >

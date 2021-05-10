@@ -8,7 +8,11 @@ export default function AnswerDropBox({ navigation, route }) {
   const { publicDropBoxInfo } = route.params;
   const [dropBoxAnswer, setDropBoxAnswer] = useState(null);
   return (
-    <ScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        minHeight: "100%",
+      }}
+    >
       <Card
         containerStyle={{ justifyContent: "space-around", minHeight: "95%" }}
       >
