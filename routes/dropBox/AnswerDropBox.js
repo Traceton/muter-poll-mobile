@@ -14,7 +14,7 @@ export default function AnswerDropBox({ navigation, route }) {
       }}
     >
       <Card
-        containerStyle={{ justifyContent: "space-around", minHeight: "95%" }}
+        containerStyle={{ justifyContent: "space-around", minHeight: "80%" }}
       >
         <Card.Title style={{ fontWeight: "200", fontSize: 30 }}>
           {publicDropBoxInfo.dropBoxId}

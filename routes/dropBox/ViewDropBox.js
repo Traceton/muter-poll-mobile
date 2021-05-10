@@ -148,7 +148,7 @@ export default function ViewDropBox({ navigation, route }) {
       displayedAnswers.push(
         <ScrollView key={answer.dropBoxAnswer}>
           <Card>
-            <Card.Title style={{ fontWeight: "300", fontSize: 20 }}>
+            <Card.Title style={{ fontWeight: "200", fontSize: 20 }}>
               {answer.dropBoxAnswer}
             </Card.Title>
           </Card>

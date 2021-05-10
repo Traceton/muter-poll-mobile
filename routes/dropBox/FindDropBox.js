@@ -82,7 +82,7 @@ export default function FindDropBox({ navigation, route }) {
           Please enter your drop box code below.
         </Card.Title>
         <Input
-          label="Drop Box Code"
+          // label="Drop Box Code"
           placeholder="Drop Box Code here"
           style={{ marginVertical: 10 }}
           onChangeText={(Text) => {
