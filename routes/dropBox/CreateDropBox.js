@@ -11,7 +11,6 @@ export default function CreateDropBox({ navigation }) {
   const [dropBoxName, setDropBoxName] = useState(null);
   const [dropBoxQuestion, setdropBoxQuestion] = useState(null);
   const [dropBoxPassword, setDropBoxPassword] = useState(null);
-  const [dropBoxLocation, setDropBoxLocation] = useState(null);
   const [userEmail, setuserEmail] = useState(null);
 
   return (
@@ -53,7 +52,6 @@ export default function CreateDropBox({ navigation }) {
             setDropBoxPassword(Text);
           }}
         />
-
         <Card.Title>
           Your Email (used to send you your drop box info.)
         </Card.Title>
@@ -72,16 +70,14 @@ export default function CreateDropBox({ navigation }) {
               dropBoxId,
               dropBoxName,
               dropBoxQuestion,
-              dropBoxPassword,
-              dropBoxLocation)
+              dropBoxPassword)
             ) {
               const res = await createNewDropBox(
                 userEmail,
                 dropBoxId,
                 dropBoxName,
                 dropBoxQuestion,
-                dropBoxPassword,
-                dropBoxLocation
+                dropBoxPassword
               );
 
               if (res && res.messageType === "success") {
